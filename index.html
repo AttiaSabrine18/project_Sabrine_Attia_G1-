@@ -7,43 +7,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+   <!-- Conteneur principal pour centrer et organiser le contenu -->
    <div class="container">
+
+    <!-- En-tête du site -->
     <header>
         <p class="headerLine">Testez vos connaissances avec ce quiz amusant !</p>
     </header>
     
+    <!-- Carte principale contenant le contenu de l’accueil -->
     <div class="card">
+        <!-- Brève description du quiz -->
         <p class="intro">Ce quiz contient 20 questions sur HTML, CSS et JS</p>
         
+        <!-- Section des options (nom + bouton démarrer) -->
         <div class="options">
             <label for="username">Votre nom :</label>
+            <!-- Champ de saisie du nom -->
             <input type="text" id="username" placeholder="Entrez votre nom">
-             <button id="start-btn" class="btn">Commencer le quiz</button>
+            <!-- Bouton pour commencer le quiz -->
+            <button id="start-btn" class="btn">Commencer le quiz</button>
         </div>
-       
     </div>
+
 </div>
     
+    <!-- Script JavaScript intégré -->
     <script>
+        // Quand l’utilisateur clique sur le bouton "Commencer le quiz"
         document.getElementById('start-btn').addEventListener('click', function() {
+            // Récupération du nom saisi dans le champ texte
             const username = document.getElementById('username').value.trim();
             
+            // Vérifie si le champ est vide
             if (username === "") {
                 alert("Veuillez entrer votre nom pour commencer le quiz.");
-                return;
+                return; // Stoppe l’exécution si pas de nom
             }
             
-            // Stocker le nom dans le localStorage
+            // Enregistre le nom dans le stockage local du navigateur
             localStorage.setItem('quizPlayerName', username);
             
-            // Rediriger vers la page du quiz
+            // Redirige vers la page du quiz
             window.location.href = 'pages/quiz.html';
         });
 
-        // Remplir automatiquement le nom s'il existe déjà
+        // Lors du chargement de la page
         window.addEventListener('DOMContentLoaded', function() {
+            // Vérifie si un nom est déjà enregistré dans le localStorage
             const savedName = localStorage.getItem('quizPlayerName');
             if (savedName) {
+                // Remplit automatiquement le champ texte avec le nom sauvegardé
                 document.getElementById('username').value = savedName;
             }
         });
