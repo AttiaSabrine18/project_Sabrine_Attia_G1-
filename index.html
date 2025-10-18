@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactif - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="container">
+    <header>
+        <p class="headerLine">Testez vos connaissances avec ce quiz amusant !</p>
+    </header>
+    
+    <div class="card">
+        <p class="intro">Ce quiz contient 20 questions sur HTML, CSS et JS</p>
+        
+        <div class="options">
+            <label for="username">Votre nom :</label>
+            <input type="text" id="username" placeholder="Entrez votre nom">
+             <button id="start-btn" class="btn">Commencer le quiz</button>
+        </div>
+       
+    </div>
+</div>
+    
+    <script>
+        document.getElementById('start-btn').addEventListener('click', function() {
+            const username = document.getElementById('username').value.trim();
+            
+            if (username === "") {
+                alert("Veuillez entrer votre nom pour commencer le quiz.");
+                return;
+            }
+            
+            // Stocker le nom dans le localStorage
+            localStorage.setItem('quizPlayerName', username);
+            
+            // Rediriger vers la page du quiz
+            window.location.href = 'pages/quiz.html';
+        });
+
+        // Remplir automatiquement le nom s'il existe déjà
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedName = localStorage.getItem('quizPlayerName');
+            if (savedName) {
+                document.getElementById('username').value = savedName;
+            }
+        });
+    </script>
+</body>
+</html>

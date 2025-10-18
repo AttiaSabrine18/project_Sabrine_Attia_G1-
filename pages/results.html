@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactif - Résultats</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card-result">
+            <h2 id="result-title">Félicitations, <span id="result-name"></span> !</h2>
+            
+            <div class="score-display">
+                <div class="score-circle">
+                    <span id="final-score">0</span>/20
+                </div>
+                <p id="result-message">Message de résultat</p>
+            </div>
+            
+            <!-- Nouvelle grille de résultats -->
+            <div class="results-grid" id="results-grid">
+                <!-- Les boxes de résultats seront générées dynamiquement -->
+            </div>
+            
+            <div class="actions">
+                <button id="restart-btn" class="btn">Recommencer</button>
+                <button id="home-btn" class="btn btn-secondary">Retour à l'accueil</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../scripts/data.js"></script>
+    <script src="../scripts/results.js"></script>
+</body>
+</html>

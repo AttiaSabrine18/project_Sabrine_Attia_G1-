@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interactif - Questions</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+       
+            <div class="quiz-info">
+                <span id="player-name"></span>
+               <span>Question <span id="question-number">1</span>/20</span>
+                <span>Score : <span id="score">0</span></span>
+            </div>
+        </header>
+        
+        <div class="card">
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+            
+            <h2 id="question-text">Question</h2>
+            
+            <div id="options-container" class="options-container">
+                <!-- Les options seront générées dynamiquement -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-btn" class="btn btn-secondary">Précédent</button>
+                <button id="next-btn" class="btn">Suivant</button>
+                <button id="submit-btn" class="btn btn-primary">Terminer</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../scripts/data.js"></script>
+    <script src="../scripts/quiz.js"></script>
+</body>
+</html>
