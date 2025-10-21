@@ -44,6 +44,15 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
+.container-result{
+    position: relative;
+    z-index: 1;
+    border-radius: 20px;
+    padding: 0 20px 20px 10px ;
+    max-width: 1000px;
+    margin: 70px auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 /* Styles spécifiques pour la page d'accueil */
 .headerLine {
     color: var(--light-color);
@@ -365,7 +374,6 @@ pointer-events: auto;
     font-weight: 600;
 }
 
-/* Grille de résultats avec style cyan */
 .results-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -535,6 +543,10 @@ pointer-events: auto;
     100% { box-shadow: 0 0 5px rgba(0, 180, 216, 0.5); }
 }
 
-.card {
+.card  {
     animation: glow 3s ease-in-out infinite;
+}
+.container-result {
+        animation: glow 3s ease-in-out infinite;
+
 }
