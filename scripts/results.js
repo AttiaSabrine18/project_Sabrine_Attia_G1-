@@ -23,19 +23,23 @@ function showResults() {
         resultTitle.textContent = "Félicitations, " + playerName + " !";
         resultMessage.textContent = "Vous avez obtenu un score parfait !";
         resultMessage.style.color = "var(--success-color)";
+        resultTitle.style.textAlign = "center"
+        resultTitle.style.color = " var(--cyan-light)"
+        resultTitle.style.paddingTop = "40px"
     } else if (score >= quizData.length / 2) {
         resultTitle.textContent = "Bon travail, " + playerName + " !";
         resultMessage.textContent = "Vous avez bien répondu à la majorité des questions.";
-        resultMessage.style.color = "var(--primary-color)";
+        resultMessage.style.color = "var(--warning-color)";
         resultTitle.style.textAlign = "center"
-        resultTitle.style.color = " #53d1df"
-        resultTitle.style.paddingTop = "40px"
-
-
+        resultTitle.style.color = " var(--cyan-light)"
+          resultTitle.style.paddingTop = "40px"
     } else {
         resultTitle.textContent = "Dommage, " + playerName + " !";
         resultMessage.textContent = "Vous pouvez faire mieux la prochaine fois !";
+        resultTitle.style.color = " var(--cyan-light)"
         resultMessage.style.color = "var(--accent-color)";
+        resultTitle.style.textAlign = "center"
+        resultTitle.style.paddingTop = "40px"
     }
     
     // Afficher la grille de résultats

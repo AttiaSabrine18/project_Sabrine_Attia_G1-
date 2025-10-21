@@ -87,7 +87,6 @@ header p {
 
 /* Carte principale avec style cyan */
 .card {
-    background: var(--cyan-gradient);
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 180, 216, 0.3);
     padding: 40px 30px;
@@ -106,6 +105,7 @@ header p {
     bottom: 0;
     background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
     z-index: 1;
+     pointer-events: none;
 }
 
 .card h2 {
@@ -135,6 +135,8 @@ header p {
     max-width: 400px;
     position: relative;
     z-index: 2;
+    cursor: pointer;
+pointer-events: auto;
 }
 
 .options label {
