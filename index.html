@@ -39,7 +39,8 @@
                 </button>
             </div>
         </div>
-                <div class="info-section">
+        
+        <div class="info-section">
             <div class="info-item">
                 <div class="info-icon">
                     <i class="fas fa-clock"></i>
@@ -74,38 +75,41 @@
     <script>
         // Initialisation des particules
         document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: "#00b4d8" },
-                    shape: { type: "circle" },
-                    opacity: { value: 0.5, random: true },
-                    size: { value: 3, random: true },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#00b4d8",
-                        opacity: 0.4,
-                        width: 1
+            // Vérifier si particlesJS est disponible
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: "#00b4d8" },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.5, random: true },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: "#00b4d8",
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: "none",
+                            random: true,
+                            straight: false,
+                            out_mode: "out",
+                            bounce: false
+                        }
                     },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out",
-                        bounce: false
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: { enable: true, mode: "repulse" },
+                            onclick: { enable: true, mode: "push" }
+                        }
                     }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "repulse" },
-                        onclick: { enable: true, mode: "push" }
-                    }
-                }
-            });
+                });
+            }
             
             // Remplir automatiquement le nom s'il existe déjà
             const savedName = localStorage.getItem('quizPlayerName');
@@ -127,6 +131,21 @@
             });
         });
 
+        // Fonction pour jouer un son avec gestion d'erreur
+        function playSound(soundId) {
+            try {
+                const sound = document.getElementById(soundId);
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.play().catch(e => {
+                        console.log('Lecture audio bloquée:', e);
+                    });
+                }
+            } catch (error) {
+                console.log('Erreur de lecture audio:', error);
+            }
+        }
+
         document.getElementById('start-btn').addEventListener('click', function() {
             const username = document.getElementById('username').value.trim();
             
@@ -139,13 +158,12 @@
                 }, 500);
                 
                 // Effet sonore d'erreur
-                document.getElementById('error-sound').play();
-                
+                playSound('error-sound');
                 return;
             }
             
             // Effet sonore de clic
-            document.getElementById('click-sound').play();
+            playSound('click-sound');
             
             // Animation de transition
             const btn = this;
@@ -158,6 +176,13 @@
             setTimeout(() => {
                 window.location.href = 'pages/quiz.html';
             }, 300);
+        });
+
+        // Gestion de la touche Entrée
+        document.getElementById('username').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('start-btn').click();
+            }
         });
     </script>
 </body>
