@@ -5,31 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Interactif - Résultats</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Élément pour les particules animées -->
+    <div id="particles-js"></div>
+    
     <div class="container-result">
         <div class="card-result">
-            <h2 id="result-title">Félicitations, <span id="result-name"></span> !</h2>
-            
-            <div class="score-display">
-                <div class="score-circle">
-                    <span id="final-score">0</span>/20
-                </div>
-                <p id="result-message">Message de résultat</p>
+            <div class="result-header">
+                <h2 id="result-title" class="result-title-animation">Félicitations, <span id="result-name"></span> !</h2>
             </div>
             
-            <!-- Nouvelle grille de résultats -->
-            <div class="results-grid" id="results-grid">
-                <!-- Les boxes de résultats seront générées dynamiquement -->
+            <div class="score-display">
+                <div class="score-circle-container">
+                    <div class="score-circle-bg"></div>
+                    <div class="score-circle">
+                        <span id="final-score" class="score-countup">0</span>
+                        <span class="score-total">/20</span>
+                    </div>
+                    <div class="score-ring"></div>
+                </div>
+                <p id="result-message" class="result-message-animation">Message de résultat</p>
+            </div>
+            
+            <div class="results-section">
+                <h3 class="section-subtitle">Détail de vos réponses</h3>
+                <div class="results-grid" id="results-grid">
+                    <!-- Les boxes de résultats seront générées dynamiquement -->
+                </div>
+            </div>
+            
+            <!-- Statistiques -->
+            <div class="stats-container">
+                <div class="stat-card correct-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="correct-count">0</div>
+                        <div class="stat-label">Correctes</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card incorrect-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="incorrect-count">0</div>
+                        <div class="stat-label">Incorrectes</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card percentage-stat">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="percentage">0%</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                </div>
             </div>
             
             <div class="actions">
-                <button id="restart-btn" class="btn">Recommencer</button>
-                <button id="home-btn" class="btn btn-secondary">Retour à l'accueil</button>
+                <button id="restart-btn" class="btn btn-pulse">
+                    <i class="fas fa-redo"></i>
+                    <span>Recommencer</span>
+                </button>
+                <button id="home-btn" class="btn btn-secondary btn-float">
+                    <i class="fas fa-home"></i>
+                    <span>Retour à l'accueil</span>
+                </button>
             </div>
         </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../scripts/data.js"></script>
     <script src="../scripts/results.js"></script>
 </body>

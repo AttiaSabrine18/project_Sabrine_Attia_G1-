@@ -5,47 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Interactif - Accueil</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-   <div class="container">
-    <header>
-        <p class="headerLine">Testez vos connaissances avec ce quiz amusant !</p>
-    </header>
+    <!-- Particules animées en arrière-plan -->
+    <div id="particles-js"></div>
     
-    <div class="card">
-        <p class="intro">Ce quiz contient 20 questions sur HTML, CSS et JS</p>
+    <div class="container">
+        <header>
+            <h1 class="title-animation">Quiz Interactif</h1>
+            <p class="headerLine">Testez vos connaissances avec ce quiz amusant !</p>
+        </header>
         
-        <div class="options">
-            <label for="username">Votre nom :</label>
-            <input type="text" id="username" placeholder="Entrez votre nom">
-             <button id="start-btn" class="btn">Commencer le quiz</button>
+        <div class="card">
+            <div class="intro-container">
+                <p class="intro">Ce quiz contient 20 questions sur HTML, CSS et JS</p>
+                <div class="tech-icons">
+                    <i class="fab fa-html5"></i>
+                    <i class="fab fa-css3-alt"></i>
+                    <i class="fab fa-js-square"></i>
+                </div>
+            </div>
+            
+            <div class="options">
+                <label for="username">Votre nom :</label>
+                <div class="input-container">
+                    <input type="text" id="username" placeholder="Entrez votre nom">
+                    <i class="fas fa-user"></i>
+                </div>
+                <button id="start-btn" class="btn">
+                    <span>Commencer le quiz</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
-       
+                <div class="info-section">
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-text">
+                    <h3>20 Questions</h3>
+                    <p>Testez vos connaissances</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="info-text">
+                    <h3>Score en temps réel</h3>
+                    <p>Suivez votre progression</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="info-text">
+                    <h3>Résultats détaillés</h3>
+                    <p>Analysez vos performances</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
     
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        document.getElementById('start-btn').addEventListener('click', function() {
-            const username = document.getElementById('username').value.trim();
+        // Initialisation des particules
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00b4d8" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#00b4d8",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
             
-            if (username === "") {
-                alert("Veuillez entrer votre nom pour commencer le quiz.");
-                return;
-            }
-            
-            // Stocker le nom dans le localStorage
-            localStorage.setItem('quizPlayerName', username);
-            
-            // Rediriger vers la page du quiz
-            window.location.href = 'pages/quiz.html';
-        });
-
-        // Remplir automatiquement le nom s'il existe déjà
-        window.addEventListener('DOMContentLoaded', function() {
+            // Remplir automatiquement le nom s'il existe déjà
             const savedName = localStorage.getItem('quizPlayerName');
             if (savedName) {
                 document.getElementById('username').value = savedName;
             }
+            
+            // Animation d'entrée des éléments
+            const elements = document.querySelectorAll('.card, .info-item');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        document.getElementById('start-btn').addEventListener('click', function() {
+            const username = document.getElementById('username').value.trim();
+            
+            if (username === "") {
+                // Animation de secousse pour l'input
+                const input = document.getElementById('username');
+                input.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    input.style.animation = '';
+                }, 500);
+                
+                // Effet sonore d'erreur
+                document.getElementById('error-sound').play();
+                
+                return;
+            }
+            
+            // Effet sonore de clic
+            document.getElementById('click-sound').play();
+            
+            // Animation de transition
+            const btn = this;
+            btn.style.transform = 'scale(0.95)';
+            
+            // Stocker le nom dans le localStorage
+            localStorage.setItem('quizPlayerName', username);
+            
+            // Redirection avec délai pour l'animation
+            setTimeout(() => {
+                window.location.href = 'pages/quiz.html';
+            }, 300);
         });
     </script>
 </body>
