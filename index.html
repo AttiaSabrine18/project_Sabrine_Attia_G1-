@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Particules animées en arrière-plan -->
+
     <div id="particles-js"></div>
     
     <div class="container">
@@ -19,7 +19,7 @@
         
         <div class="card">
             <div class="intro-container">
-                <p class="intro">Ce quiz contient 20 questions sur HTML, CSS et JS</p>
+                <p class="intro">Choisissez un quiz :</p>
                 <div class="tech-icons">
                     <i class="fab fa-html5"></i>
                     <i class="fab fa-css3-alt"></i>
@@ -28,54 +28,35 @@
             </div>
             
             <div class="options">
+
                 <label for="username">Votre nom :</label>
                 <div class="input-container">
                     <input type="text" id="username" placeholder="Entrez votre nom">
                     <i class="fas fa-user"></i>
                 </div>
+
+                <label for="quizType">Type de quiz :</label>
+                <div class="input-container">
+                    <select id="quizType">
+                        <option value="ancien">Quiz QCM (HTML/CSS/JS)</option>
+                        <option value="vf">Quiz Vrai / Faux</option>
+                    </select>
+                    <i class="fas fa-list"></i>
+                </div>
+
                 <button id="start-btn" class="btn">
-                    <span>Commencer le quiz</span>
+                    <span>Commencer</span>
                     <i class="fas fa-arrow-right"></i>
                 </button>
-            </div>
-        </div>
-        
-        <div class="info-section">
-            <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="info-text">
-                    <h3>20 Questions</h3>
-                    <p>Testez vos connaissances</p>
-                </div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div class="info-text">
-                    <h3>Score en temps réel</h3>
-                    <p>Suivez votre progression</p>
-                </div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-                <div class="info-text">
-                    <h3>Résultats détaillés</h3>
-                    <p>Analysez vos performances</p>
-                </div>
+
             </div>
         </div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
-        // Initialisation des particules
         document.addEventListener('DOMContentLoaded', function() {
-            // Vérifier si particlesJS est disponible
             if (typeof particlesJS !== 'undefined') {
                 particlesJS('particles-js', {
                     particles: {
@@ -94,96 +75,35 @@
                         move: {
                             enable: true,
                             speed: 2,
-                            direction: "none",
                             random: true,
-                            straight: false,
-                            out_mode: "out",
-                            bounce: false
-                        }
-                    },
-                    interactivity: {
-                        detect_on: "canvas",
-                        events: {
-                            onhover: { enable: true, mode: "repulse" },
-                            onclick: { enable: true, mode: "push" }
+                            out_mode: "out"
                         }
                     }
                 });
             }
-            
-            // Remplir automatiquement le nom s'il existe déjà
-            const savedName = localStorage.getItem('quizPlayerName');
-            if (savedName) {
-                document.getElementById('username').value = savedName;
-            }
-            
-            // Animation d'entrée des éléments
-            const elements = document.querySelectorAll('.card, .info-item');
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
         });
-
-        // Fonction pour jouer un son avec gestion d'erreur
-        function playSound(soundId) {
-            try {
-                const sound = document.getElementById(soundId);
-                if (sound) {
-                    sound.currentTime = 0;
-                    sound.play().catch(e => {
-                        console.log('Lecture audio bloquée:', e);
-                    });
-                }
-            } catch (error) {
-                console.log('Erreur de lecture audio:', error);
-            }
-        }
 
         document.getElementById('start-btn').addEventListener('click', function() {
             const username = document.getElementById('username').value.trim();
-            
+            const type = document.getElementById('quizType').value;
+
             if (username === "") {
-                // Animation de secousse pour l'input
-                const input = document.getElementById('username');
-                input.style.animation = 'shake 0.5s ease';
-                setTimeout(() => {
-                    input.style.animation = '';
-                }, 500);
-                
-                // Effet sonore d'erreur
-                playSound('error-sound');
                 return;
             }
-            
-            // Effet sonore de clic
-            playSound('click-sound');
-            
-            // Animation de transition
-            const btn = this;
-            btn.style.transform = 'scale(0.95)';
-            
-            // Stocker le nom dans le localStorage
+
             localStorage.setItem('quizPlayerName', username);
-            
-            // Redirection avec délai pour l'animation
+
             setTimeout(() => {
-                window.location.href = 'pages/quiz.html';
+                if (type === "ancien") {
+                    window.location.href = "pages/quiz.html";
+                } else {
+                    window.location.href = "pages/quiz_vf.html";
+                }
             }, 300);
         });
 
-        // Gestion de la touche Entrée
-        document.getElementById('username').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('start-btn').click();
-            }
-        });
+        
     </script>
+
 </body>
 </html>

@@ -1,0 +1,20 @@
+{
+    "questions": [
+        {
+            "question": "HTML est un langage de programmation.",
+            "answer": "Faux"
+        },
+        {
+            "question": "CSS sert à styliser les pages web.",
+            "answer": "Vrai"
+        },
+        {
+            "question": "JavaScript peut modifier le contenu HTML.",
+            "answer": "Vrai"
+        },
+        {
+            "question": "Le flexbox est une propriété JavaScript.",
+            "answer": "Faux"
+        }
+    ]
+}
